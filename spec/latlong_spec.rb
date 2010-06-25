@@ -15,10 +15,13 @@ describe LatLong do
           parts = line.split(/\s+/)
           case parts.size
           when 4
-            input, x, y = "#{parts[0]} #{parts[1]}", parts[2].to_f, parts[3].to_f
+            input, x, y = parts[0..1].join(" "), parts[2].to_f, parts[3].to_f
           when 6
-            input = "#{parts[0]} #{parts[1]} #{parts[2]} #{parts[3]}"
+            input = parts[0..3].join(" ")
             x, y  = parts[4].to_f, parts[5].to_f
+          when 8
+            input = parts[0..5].join(" ")
+            x, y  = parts[6].to_f, parts[7].to_f          
           end
           it "'#{input}' should become [#{x}, #{y}]" do
             LatLong.to_xy(input).should == [x, y]
