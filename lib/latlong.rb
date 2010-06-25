@@ -11,26 +11,24 @@ class LatLong
   }
   
   def self.to_xy(input)
-    x, y = nil
-    
-    case input
+    x, y = case input
     when /([+-]?#{DECIMAL})\s+([+-]?#{DECIMAL})/
-      x, y = process_degrees(
+      process_degrees(
         :y => { :degrees => $1 },
         :x => { :degrees => $2 }
       )
     when /(#{DECIMAL})\s+(#{DIRECTION})\s+(#{DECIMAL})\s+(#{DIRECTION})/
-      x, y = process_degrees(
+      process_degrees(
         :y => { :direction => $2,  :degrees => $1 },
         :x => { :direction => $4,  :degrees => $3 }
       )
     when /(#{DIRECTION})\s+(#{DECIMAL})\s+(#{DIRECTION})\s+(#{DECIMAL})/
-      x, y = process_degrees(
+      process_degrees(
         :y => { :direction => $1,  :degrees => $2 },
         :x => { :direction => $3,  :degrees => $4 }
       )
     when /(#{INTEGER})\s+(#{DECIMAL})\s+(#{DIRECTION})\s+(#{INTEGER})\s+(#{DECIMAL})\s+(#{DIRECTION})/
-      x, y = process_degrees(
+      process_degrees(
         :y => {
           :degrees => $1,
           :min => $2,
@@ -43,7 +41,7 @@ class LatLong
         }
       )
     when /(#{DIRECTION})\s+(#{INTEGER})\s+(#{DECIMAL})\s+(#{DIRECTION})\s+(#{INTEGER})\s+(#{DECIMAL})/
-      x, y = process_degrees(
+      process_degrees(
         :y => {
           :direction => $1,
           :degrees => $2,
@@ -56,7 +54,7 @@ class LatLong
         }
       )
     when /([+-]?#{INTEGER})\s+(#{DECIMAL})\s+([+-]?#{INTEGER})\s+(#{DECIMAL})/
-      x, y = process_degrees(
+      process_degrees(
         :y => {
           :degrees => $1,
           :min => $2
@@ -67,7 +65,7 @@ class LatLong
         }
       )
     when /(#{INTEGER})\s+(#{INTEGER})\s+(#{DECIMAL})\s+(#{DIRECTION})\s+(#{INTEGER})\s+(#{INTEGER})\s+(#{DECIMAL})\s+(#{DIRECTION})/
-      x, y = process_degrees(
+      process_degrees(
         :y => {
           :degrees => $1,
           :min => $2,
